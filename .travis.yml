@@ -33,7 +33,7 @@ matrix:
     addons: {apt: {packages: [libgmp-dev,cabal-install-1.22,ghc-7.10.3], sources: [hvr-ghc]}}
 
   # Build on macOS in addition to Linux
-  - env: BUILD=stack ARGS="" PKG_FLAGS="--flag hup:enablewebtests" 
+  - env: BUILD=stack ARGS=""  
     compiler: ": #stack default osx"
     os: osx
 
@@ -93,7 +93,6 @@ script:
   case "$BUILD" in
     stack)
       stack --no-terminal $ARGS test --bench --no-run-benchmarks --haddock --no-haddock-deps
-      stack --no-terminal $ARGS exec hup -- --version
       ;;
     cabal)
       cabal install --enable-tests --enable-benchmarks --force-reinstalls --ghc-options=-O0 --reorder-goals --max-backjumps=-1 $CABALARGS $PACKAGES
@@ -140,4 +139,4 @@ script:
 #  on:
 #    tags: true
 #    all_branches: true
-#    repo: phlummox/hup
+#    repo: phlummox/stack-yaml
